@@ -11,8 +11,6 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_APP_ID
   };
 
-console.log(process.env.NEXT_PUBLIC_API_KEY === "AIzaSyCCNFrw4Usxz0VtaxS4HVGzQqaW9xGLIEY");
-
 const app = firebase.initializeApp(firebaseConfig)
 
 const db = app.firestore();

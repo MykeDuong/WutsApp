@@ -1,13 +1,18 @@
 import { Avatar } from '@mui/material';
 import styled from 'styled-components';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import getRecipientEmail from '../utils/getRecipientEmail';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const Chat = ({ id, users }) => {
 
     const [user] = useAuthState(auth);
+    const [recipientSnapshot] = useCollection(db.collection('users').where('email', '==', getRecipientEmail(users, user)));
+    console.log(recipientSnapshot);
+    const recipient = recipientSnapshot?.docs?.[0]?.data();
+
     const recipientEmail = getRecipientEmail(users, user);
     
     console.log(users);
