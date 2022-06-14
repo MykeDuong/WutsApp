@@ -12,6 +12,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import  MicIcon from '@mui/icons-material/Mic';
+import SendIcon from '@mui/icons-material/Send';
 
 import { auth, db } from '../firebase';
 import getRecipientEmail from '../utils/getRecipientEmail';
@@ -123,8 +124,10 @@ const ChatScreen = ({ chat, messages }) => {
       <InputContainer>
         <InsertEmoticonIcon />
         <Input value={input} onChange={(e) => setInput(e.target.value)}/>
-        <button disabled={!input} type="submit" onClick={sendMessage}>Send Message</button>
-        <MicIcon />
+        <MicIcon style={{ marginRight: 10 }}/>
+        <IconButton style={{ marginRight: 5 }} disabled={!input} type="submit" onClick={sendMessage}>
+          <SendIcon />
+        </IconButton>
       </InputContainer>
     </Container>
   )
