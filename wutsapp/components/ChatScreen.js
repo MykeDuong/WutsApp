@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
 import { useCollection } from 'react-firebase-hooks/firestore';
@@ -20,6 +20,8 @@ import Message from './Message';
 const ChatScreen = ({ chat, messages }) => {
   
   const [user] = useAuthState(auth);
+  const endOfMessagesRef = useRef(null);
+  
   const [input, setInput] = useState('');
   const recipientEmail = getRecipientEmail(chat.users, user);
   const router = useRouter();
@@ -75,6 +77,13 @@ const ChatScreen = ({ chat, messages }) => {
     setInput('');
   }
 
+  const scrollToBottom = () => {
+    endOfMessagesRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }
+
   return (
     <Container>
       <Header>
@@ -108,7 +117,7 @@ const ChatScreen = ({ chat, messages }) => {
 
       <MessageContainer>
         {showMessages()}
-        <EndOfMessage />
+        <EndOfMessage ref={endOfMessagesRef} />
       </MessageContainer>
 
       <InputContainer>
@@ -162,7 +171,9 @@ const MessageContainer = styled.div`
   min-height: 90vh;
 `;
 
-const EndOfMessage = styled.div``;
+const EndOfMessage = styled.div`
+  margin-bottom: 50px;
+`;
 
 const InputContainer = styled.form`
   display: flex;

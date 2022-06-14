@@ -75,6 +75,7 @@ const Container = styled.div`
     min-width:300px;
     max-width: 350px;
 
+
     ::-webkit-scrollbar {
         display: none;
     }
