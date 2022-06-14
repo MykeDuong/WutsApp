@@ -38,7 +38,7 @@ const Sidebar = () => {
     return (
         <Container>
             <Header>
-                <UserAvatar onClick={() => auth.signOut()}/>
+                <UserAvatar src={user.photoURL} onClick={() => auth.signOut()}/>
 
                 <IconContainer>
                     <IconButton>
@@ -63,7 +63,7 @@ const Sidebar = () => {
                 <Chat key={chat.id} id = {chat.id} users={chat.data().users} />
             ))}
         </Container>
-    )
+)
 }
 
 export default Sidebar
